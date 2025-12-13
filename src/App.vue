@@ -1,12 +1,18 @@
 <script setup lang="ts">
+import Layout from './components/Layout.vue';
 </script>
 
 <template>
-  <h1>Hello world!</h1>
-  <p>Created with Vue</p>
-  <button>Click me!</button>
+  <Layout>
+    <main>
+      <h1>Hello world!</h1>
+      <p>This is a colorful notebook</p>
+      <button>
+        My notes
+        <i class="fa-regular fa-note-sticky"></i>
+      </button>
+    </main>
+  </Layout>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

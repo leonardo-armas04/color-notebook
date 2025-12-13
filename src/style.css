@@ -1,17 +1,18 @@
 html {
+  --color-primary-700: #001935;
   --color-primary-600: #002146;
   --color-primary-500: #002F63;
   --color-primary-400: #003F88;
   --color-secondary-400: #00509D;
   --color-secondary-300: #0056A7;
-  --color-secondary-200: #0083fd; 
+  --color-secondary-200: #0083fd;
   --color-terciary-400: #FFF2C2;
-  
+
   --border-dark: #FDC500;
   --border-light: #FFD500;
 
   --color-light: #F4F4F4;
-  
+
   --border-radius-small: 8px;
   --border-radius-large: 12px;
 
@@ -20,32 +21,59 @@ html {
 
 body {
   font-family: "Orbitron", sans-serif;
-  background-image: linear-gradient(var(--color-primary-600),var(--color-primary-500));
+  background-image: linear-gradient(var(--color-primary-600), var(--color-primary-500));
   color: var(--color-light);
   /* color: aliceblue; */
   text-align: center;
 }
 
+main {
+  /* 7.85rem header/footer + 2rem margin top/bottom */
+  min-height: calc(100vh - 9.85rem);
+  margin: 1rem;
+}
+
+header nav {
+  background-image: linear-gradient(#000, var(--color-primary-600));
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  color: var(--color-secondary-200);
+}
+
+.btn:hover {
+  color: var(--color-light);
+}
+
 button {
-    color: var(--color-light);
-    background-color: var(--color-secondary-400);
-    width: fit-content;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: 500;
-    padding: 0.25rem 1.25rem;
-    border: 1.5px solid var(--color-light);
-    border-radius: var(--border-radius-small);
-    box-shadow: 2px 2px 0 0 var(--color-light);
-    transition-duration: 200ms;
+  color: var(--color-light);
+  background-color: var(--color-secondary-400);
+  width: fit-content;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  padding: 0.25rem 1.25rem;
+  border: 1.5px solid var(--color-light);
+  border-radius: var(--border-radius-small);
+  box-shadow: 2px 2px 0 0 var(--color-light);
+  transition-duration: 200ms;
 }
 
 button:hover {
-    box-shadow: 0 0 0 0 var(--color-light);
-    transform: translate(2px, 2px);
+  box-shadow: 0 0 0 0 var(--color-light);
+  transform: translate(2px, 2px);
 }
 
 a {
   color: var(--color-secondary-200);
   text-decoration: none;
+}
+
+footer {
+  background-image: linear-gradient(#000, var(--color-primary-600));
+  padding: 1rem 2rem;
 }
