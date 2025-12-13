@@ -5,10 +5,12 @@
     <header>
         <nav>
             <a class="btn" href="/">Color Notebook</a>
-            <button class="navbar-btn">
-                New
-                <i class="fa-solid fa-file-pen"></i>
-            </button>
+            <a href="/new">
+                <button class="navbar-btn">
+                    New
+                    <i class="fa-solid fa-file-pen"></i>
+                </button>
+            </a>
         </nav>
     </header>
 
