@@ -47,4 +47,7 @@ class Note {
     }
 }
 
-export { Note }
+export {
+    type NoteJSON,
+    Note
+}
