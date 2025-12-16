@@ -1,0 +1,77 @@
+#notes-container {
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+}
+
+ol#all-notes {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 0.4rem;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+}
+
+li.note {
+    padding: 0.5rem 0;
+    border-radius: var(--border-radius-small);
+}
+
+a.note-link {
+    color: inherit;
+}
+
+li.note article {
+    height: 12rem;
+    padding: 0 1rem;
+    overflow: hidden;
+}
+
+.note-title {
+    margin-bottom: 0.5rem;
+}
+
+.note-title h4 {
+    margin: 0;
+}
+
+.note p {
+    text-align: justify;
+}
+
+.red {
+    background-color: var(--red);
+}
+
+.orange {
+    background-color: var(--orange);
+}
+
+.yellow {
+    background-color: var(--yellow);
+    color: #28282B;
+}
+
+.green {
+    background-color: var(--green);
+}
+
+.blue {
+    background-color: var(--blue);
+}
+
+.purple {
+    background-color: var(--purple);
+}
+
+@media (max-width: 768px) {
+    #notes-container {
+        width: 95%;
+    }
+
+    ol#all-notes {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+}
