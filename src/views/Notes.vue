@@ -1,18 +1,10 @@
 <script setup lang="ts">
 import type { RouterLink } from 'vue-router'
-import { type NoteJSON } from '../models/note-model';
+import loadNotes from '../utils/all-notes';
+import type { NoteJSON } from '../models/note-model';
 
 let totalNotes = localStorage.length
-
-function sortByDate(a: NoteJSON, b: NoteJSON): number {
-    return b.longDate.localeCompare(a.longDate)
-}
-
-const notes: NoteJSON[] = Object.keys(localStorage) // Array of localStorage keys
-    .map(key => localStorage.getItem(key)) // Array of localStorage items
-    .filter(value => value !== null) // Erase nulls
-    .map(note => JSON.parse(note)) // Return notes interface
-    .sort(sortByDate)
+const notes: NoteJSON[] = loadNotes()
 
 </script>
 
@@ -31,7 +23,7 @@ const notes: NoteJSON[] = Object.keys(localStorage) // Array of localStorage key
     <section v-else id="notes-container">
         <ol id="all-notes">
             <li v-for="note in notes" :class="`note ${note.color}`" :key="note._id">
-                <a :href="`/${note.title}`" class="note-link">
+                <RouterLink :to="`/notes/${note._id}`" class="note-link">
                     <article>
                         <div class="note-title">
                             <h4>{{ note.title }}</h4>
@@ -42,7 +34,7 @@ const notes: NoteJSON[] = Object.keys(localStorage) // Array of localStorage key
                             Vitae nesciunt atque laborum repellat. Quisquam, sunt a rem quaerat quod, illo magni neque
                             harum officia iste soluta.</p>
                     </article>
-                </a>
+                </RouterLink>
             </li>
         </ol>
     </section>

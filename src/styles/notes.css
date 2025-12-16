@@ -70,6 +70,17 @@ li.note article {
     background-color: var(--purple);
 }
 
+#thisNote {
+    width: 70%;
+    margin: 0 auto;
+    border-radius: var(--border-radius-large);
+    padding: 1rem 2rem;
+}
+
+#thisNote h5 {
+    text-align: justify;
+}
+
 @media (max-width: 768px) {
     #notes-container {
         width: 95%;
@@ -77,5 +88,9 @@ li.note article {
 
     ol#all-notes {
         grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+
+    #thisNote {
+        width: 90%;
     }
 }
