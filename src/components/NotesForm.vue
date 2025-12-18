@@ -1,32 +1,57 @@
 <script setup lang="ts">
     import { useRouter } from 'vue-router'
-    import { Note } from '../models/note-model'
+    import { Note, type NoteJSON } from '../models/note-model'
     import { ref } from 'vue'
+    const router = useRouter()
+    const { note } = defineProps<{ note: NoteJSON }>()
+    
+    let isEditing: boolean = false
+
+    if (note._id) {
+        isEditing = true
+    } else {
+        isEditing = false
+    }
+
     const textPlaceholder = "Wetness is the liquid's ability to maintain contact with a solid surface, meaning that water itself is not wet \nSource: BBC Science Focus"
     const colors: string[] = ["Red","Orange","Yellow","Green","Blue","Purple"]
-    let selectedColor = ref<string>("")
-    
-    const router = useRouter()
+    let title = ref<string>(note.title)
+    let body = ref<string>(note.body)
+    let selectedColor = ref<string>(note.color)
 
-    function addNote(e: SubmitEvent): void {
+    function addNote(): void {
+        const newNote = new Note(title.value,body.value,selectedColor.value)
+        newNote.save()
+    }
+
+    function editNote() {
+        note.title = title.value
+        note.body = body.value
+        note.color = selectedColor.value
+
+        localStorage.setItem(note._id,JSON.stringify(note))
+    }
+
+    function handleSubmit(e: SubmitEvent): void {
         e.preventDefault()
-        const form = e.target as HTMLFormElement
-        const title = form.elements.namedItem("title") as HTMLInputElement
-        const body = form.elements.namedItem("body") as HTMLTextAreaElement
-        
-        const note = new Note(title.value,body.value,selectedColor.value)
-        note.save()
+        if (isEditing) {
+            editNote()
+        } else {
+            addNote()
+        }
         router.push("/notes")
     }
 </script>
 
 <template>
-    <form action="/notes" @submit="addNote">
+    <form action="/notes" @submit="handleSubmit">
         <label for="title"><h5>Title</h5></label>
-        <input type="text" name="title" id="title" placeholder="Water might not be wet">
+        <input type="text" name="title" id="title"
+            placeholder="Water might not be wet" v-model="title">
         <br>
         <label for="body"><h5>Description</h5></label>
-        <textarea name="body" id="body" :placeholder="textPlaceholder"></textarea>
+        <textarea name="body" id="body" :placeholder="textPlaceholder" 
+            v-model="body"></textarea>
         <br>
         <h5>Color</h5>
         <div id="colors">

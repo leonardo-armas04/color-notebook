@@ -2,36 +2,20 @@
 import { ref, Teleport } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import loadNotes from '../utils/all-notes';
-import type { NoteJSON } from '../models/note-model';
+import { type NoteJSON, Note } from '../models/note-model';
 import DeleteModal from '../components/DeleteModal.vue';
 
 const route = useRoute()
 const router = useRouter()
 
 const notes: NoteJSON[] = loadNotes()
-const noteId = route.params.noteid
+const noteId = route.params.noteid as string
 
-function loadThisNote(): NoteJSON {
-    const thisNote: NoteJSON | undefined = notes.find(note => note._id === noteId)
-    
-    const voidNote: NoteJSON = {
-        _id: "",
-        title: "",
-        body: "",
-        createdAt: "",
-        longDate: "",
-        color: ""
-    }
+const thisNote: NoteJSON = Note.searchNote(noteId,notes)
 
-    if (!thisNote) {
-        router.replace("/404")
-        return voidNote
-    }
-
-    return thisNote
+if (!thisNote._id) {
+    router.replace("/404")
 }
-
-const thisNote: NoteJSON = loadThisNote()
 
 const showDelete = ref<boolean>(false)
 
@@ -57,7 +41,7 @@ const item: "all" | "note" = "note"
     </section>
     <br>
     <div id="btns">
-        <RouterLink to="">
+        <RouterLink :to="`/notes/${thisNote._id}/edit`">
             <button>
                 Edit
                 <i class="fa-solid fa-pencil"></i>

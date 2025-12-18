@@ -58,6 +58,25 @@ class Note {
 
         localStorage.setItem(this._id,JSON.stringify(note))
     }
+
+    public static searchNote(noteId: string, notes: NoteJSON[]): NoteJSON {
+        const thisNote: NoteJSON | undefined = notes.find(note => note._id === noteId)
+
+        const voidNote: NoteJSON = {
+            _id: "",
+            title: "",
+            body: "",
+            createdAt: "",
+            longDate: "",
+            color: ""
+        }
+
+        if (!thisNote) {
+            return voidNote
+        }
+
+        return thisNote
+    }
 }
 
 export {
