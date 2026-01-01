@@ -1,10 +1,10 @@
-#delete-modal, #warning {
+#delete-modal, .warning, #void-input {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#delete-modal {
+#delete-modal, #void-input {
     position: fixed;
     top: 0;
     left: 0;
@@ -15,7 +15,7 @@
     z-index: 10;
 }
 
-#warning {
+.warning {
     background-image: linear-gradient(var(--color-primary-600),var(--color-primary-500)) ;
     width: 40rem;
     height: 15rem;
@@ -32,7 +32,7 @@
 }
 
 @media (max-width: 768px) {
-    #warning {
+    .warning {
         width: 95%;
     }
 

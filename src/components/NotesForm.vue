@@ -1,7 +1,8 @@
 <script setup lang="ts">
     import { useRouter } from 'vue-router'
     import { Note, type NoteJSON } from '../models/note-model'
-    import { ref } from 'vue'
+    import { ref, Teleport } from 'vue'
+    import InfoModal from './InfoModal.vue'
     const router = useRouter()
     const { note } = defineProps<{ note: NoteJSON }>()
     
@@ -19,6 +20,8 @@
     let body = ref<string>(note.body)
     let selectedColor = ref<string>(note.color)
 
+    let anyVoidInputs = ref<boolean>(false)
+
     function addNote(): void {
         const newNote = new Note(title.value,body.value,selectedColor.value)
         newNote.save()
@@ -34,6 +37,12 @@
 
     function handleSubmit(e: SubmitEvent): void {
         e.preventDefault()
+
+        if (!title.value || !body.value || !selectedColor.value) {
+            anyVoidInputs.value = true
+            return
+        }
+
         if (isEditing) {
             editNote()
         } else {
@@ -74,4 +83,8 @@
             </button>
         </div>
     </form>
+
+    <Teleport to="#portal" v-if="anyVoidInputs">
+        <InfoModal @close="anyVoidInputs = false"/>
+    </Teleport>
 </template>

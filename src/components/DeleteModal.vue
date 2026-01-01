@@ -21,7 +21,7 @@ switch (item) {
 
 <template>
     <section id="delete-modal">
-        <article id="warning">
+        <article class="warning">
             <h5><b>Delete {{ item }}</b></h5>
             <p>This action will erase {{ message }} permanently. Continue?</p>
             <div id="option-btns">
